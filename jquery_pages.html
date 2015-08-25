@@ -1,45 +1,56 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 <script>
-jQuery(document).ready(function(){
-	jQuery(".topage01").click(function(){
-		hideall();
-		jQuery(".page01").fadeIn(200);
-	});
-	jQuery(".topage02").click(function(){
-		hideall();
-		jQuery(".page02").fadeIn(200);
-	});
-	jQuery(".topage03").click(function(){
-		hideall();
-		jQuery(".page03").fadeIn(200);
-	});
-	
+
+// just set this to your number of pages needed
+var num_of_pages=3;
+
+
+jQuery(document).ready(function($){
+
+	function showpage( i ){
+		return function(){
+			hideall();
+			$(".page" + i).fadeIn(200);
+		}
+	}
 	
 	function hideall() {
-		jQuery(".page01").hide();
-		jQuery(".page02").hide();
-		jQuery(".page03").hide();
-		jQuery(".page04").hide();
-		jQuery(".page05").hide();
-		jQuery(".page06").hide();
-		jQuery(".page07").hide();
-		jQuery(".page08").hide();
-		jQuery(".page09").hide();
-		jQuery(".page10").hide();
-		jQuery(".page11").hide();
-		jQuery(".pageresults").hide();
-		jQuery('html,body').animate({ scrollTop: 0 }, 'slow');
+		for(var i = 1; i <= num_of_pages; i++) {
+			$(".page" + i).hide();
+		}
 	}
+	
+	for(var i = 1; i <= num_of_pages; i++) {
+		$(".topage" + i).click(
+			showpage( i )
+		);
+	}
+
 });
 </script>
 
 
-<div class="page01">
-	<p>page01</p>
-	<p><a class="topage02" style="cursor: pointer;">click here topage02</a></p>
+<div class="page1">
+	<p>page1</p>
+	<p>
+		<a style="cursor: not-allowed;">Back</a>
+		<a class="topage2" style="cursor: pointer;">Next</a>
+	</p>
 </div>
-<div class="page02" style="display: none;">
-	<p>page02</p>
-	<p><a class="topage01" style="cursor: pointer;">click here topage01</a></p>
+<div class="page2" style="display: none;">
+	<p>page2</p>
+	<p>
+		<a class="topage1" style="cursor: pointer;">Back</a>
+		<a class="topage3" style="cursor: pointer;">Next</a>
+	</p>
 </div>
+<div class="page3" style="display: none;">
+	<p>page3</p>
+	<p>
+		<a class="topage2" style="cursor: pointer;">Back</a>
+		<a style="cursor: not-allowed;">Next</a>
+	</p>
+</div>
+
+
